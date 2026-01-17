@@ -1,0 +1,91 @@
+.main {
+    width: 290px;
+    height: 400px;
+    background-color: white;
+    padding: 0 10px 0 10px;
+}
+
+.header {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.header_list {
+    display: flex;
+    justify-content: left;
+    flex-wrap: nowrap;
+    padding: 0;
+}
+
+.header_pack_element {
+    width: 30px;
+    height: 30px;
+    list-style-type: none;
+    margin-right: 5px;
+    padding: 0;
+}
+
+.header_button {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 0;
+    border-radius: 20%;
+    background-image: url('../icons/ss-48.png');
+}
+
+.button_icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.content_wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    height: 350px;
+    list-style-type: none;
+    padding: 0;
+    scrollbar-width: none;
+    overflow-y: scroll; 
+}
+
+.scrollable-container::-webkit-scrollbar {
+    display: none;
+}
+
+.content_element {
+
+}
+
+.pack_list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pack {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 5px;
+    margin-bottom: 5px;
+}
+
+.pack .title {
+    color: black;
+    margin: 0;
+}
+
+.pack .img_wrapper {
+}
+
+.sticker {
+    width: 93px;
+    height: 93px;
+    object-fit: contain;
+}
