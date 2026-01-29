@@ -59,7 +59,6 @@ body {
 
 .packs__header {
     display: flex;
-    justify-content: left;
 }
 
 .packs__header.tools {

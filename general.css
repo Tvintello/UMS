@@ -17,13 +17,13 @@ body {
 }
 
 .general_btn.danger_btn {
-    background-color: #952828;
+    background-color: var(--danger_color);
     color: var(--text_color);
     border-color: var(--border_color);
 }
 
 .general_btn.safe_btn {
-    background-color: #2f712f;
+    background-color: var(--safe_color);
     color: var(--text_color);
 }
 
@@ -50,6 +50,12 @@ body {
 }
 
 .notification {
-    border: 1px solid var(--border_color);
+    border: 2px solid var(--border_color);
+    padding: 15px;
+}
+
+.error {
+    border: 2px solid var(--danger_color);
+    color: var(--danger_color);
     padding: 15px;
 }

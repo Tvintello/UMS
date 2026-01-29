@@ -40,7 +40,11 @@ class StorageManager {
         return btoa(binary);
     }
 
-    async fileToBase64(file) {
+    async fileToBase64(file, image=true) {
+        if (image && file.type.split("/")[0] != "image") {
+            console.error(file.name + " file is not an image");
+            return
+        }
         const buffer = await this.readFileAsArrayBuffer(file);
         const base64 = this.arrayBufferToBase64(buffer);
         const fileData = {

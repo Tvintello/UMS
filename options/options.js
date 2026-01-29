@@ -1,4 +1,5 @@
 import StorageManager from "../scripts/storage_manager.js";
+import ActionManager from "../scripts/action_manager.js";
 
 
 async function deleteBtnFunction(del_btn) {
@@ -115,6 +116,7 @@ document.getElementById("addPlentyPacks").addEventListener("click", (event) => {
                 // Collecting files to packs array
                 if (packs && packs[folder]) {
                     const data = await StorageManager.fileToBase64(file);
+                    if (!data) {ActionManager.error("Could not add the chosen packs!"); return;}
                     packs[folder].push(data);
                     console.log("Collected image: ", file)
                 }
@@ -139,6 +141,7 @@ document.getElementById("addPack").addEventListener("click", (event) => {
             for (let file of files) {
                 // Converting files to base64 file format and collecting them
                 const data = await StorageManager.fileToBase64(file);
+                if (!data) {ActionManager.error("Could not add the chosen pack!"); return;}
                 packs[packname].push(data);
                 console.log("Collected image: ", file)
             }
