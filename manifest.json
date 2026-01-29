@@ -1,21 +1,34 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "UMS - Unofficial Messenger Stickers",
     "version": "1.0.0",
     "description": "An extension for quick access to images on PC",
-    "homepage_url": "https://github.com/Tvintello/UMS",
+    
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "UMS_tvintello@developer.com",
+        "strict_min_version": "109.0"
+      }
+    },
+    
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": {
+        "48": "icons/icon-48.png"
+      },
+      "default_title": "UMS - Unofficial Messenger Stickers"
+    },
     
     "icons": {
       "48": "icons/icon-48.png"
     },
     
-    "browser_action": {
-      "default_icon": "icons/icon-48.png",
-      "default_title": "UMS",
-      "default_popup": "popup/popup.html"
-    },
-    
     "permissions": [
       "storage"
-    ]
+    ],
+
+    "developer": {
+      "name": "Tvintello",
+      "url": "https://github.com/Tvintello/"
+    }
   }

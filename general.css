@@ -3,6 +3,7 @@
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: var(--text_color);
+    font-size: 16px;
 }
 
 .general_btn {

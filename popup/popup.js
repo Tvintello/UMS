@@ -1,5 +1,5 @@
-import storageManager from "../scripts/storage_manager.js";
 import StorageManager from "../scripts/storage_manager.js";
+import BrowserManager from "../scripts/browser_manager.js";
 
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             img.addEventListener("click", () => {
                 navigator.clipboard.write([
                     new ClipboardItem({
-                        [file.type]: storageManager.base64ToBlob(file.data, file.type)
+                        [file.type]: StorageManager.base64ToBlob(file.data, file.type)
                     })
                 ])
                 console.log("Image copied: ", file.name)
@@ -52,12 +52,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.querySelector(".header.list").appendChild(pack_btn_li);
         document.getElementById("noPacksLabel").style["display"] = "none";
     }
+
+    document.getElementById("settings").addEventListener("click", () => {
+        BrowserManager.browser.tabs.create({
+            url: BrowserManager.browser.runtime.getURL('../options/options.html'),
+            active: true
+        })
+    })
 });
 
 
-document.getElementById("settings").addEventListener("click", () => {
-    browser.tabs.create({
-        url: browser.runtime.getURL('../options/options.html'),
-        active: true
-    })
-})
+

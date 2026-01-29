@@ -80,9 +80,6 @@ body {
     overflow-x: scroll; 
 }
 
-.packs__preview.elem {
-}
-
 .packs__preview__img {
     width: 120px;
 }

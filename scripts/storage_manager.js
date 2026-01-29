@@ -1,17 +1,9 @@
+import BrowserManager from "./browser_manager.js";
+
+
 class StorageManager {
     constructor() {
-        this.storageInfo = {
-            storedPacks: []
-        };
-
-        this.storage = undefined;
-        if (typeof browser !== 'undefined') {
-            this.storage = browser.storage;
-        } else if (typeof chrome !== 'undefined') {
-            this.storage = chrome.storage;
-        } else {
-            console.error("Browser API is not provided!")
-        }
+        this.storage = BrowserManager.browser.storage;
     }
 
     async getPacks() {
