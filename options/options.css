@@ -1,0 +1,88 @@
+@import url("../colors.css");
+
+body {
+    background-color: var(--primary_bg_color);
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.options {
+    width: 600px;
+}
+
+.options.list {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.options.elem {
+    background-color: var(--primary_fg_color);
+    border: 2px solid var(--border_color);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.packs.block {
+    background-color: var(--secondary_fg_color);
+    padding: 6px 20px 20px;
+    border-radius: 5px;
+}
+
+.packs.elem {
+    display: flex;
+    background-color: #f7f7f7;
+    border: 1px solid var(--border_color);
+    border-radius: 10px;
+    padding: 12px;
+    flex-direction: column;
+    background-color: var(--primary_fg_color);
+}
+
+.packs.list {
+    padding: 15px;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px solid var(--border_color);
+    border-bottom: 1px solid var(--border_color);
+}
+
+.pack_name {
+    margin-left: 6px;
+    margin-right: 14px;
+    padding: 4px 6px;
+    border-radius: 3px;
+}
+
+.packs__header {
+    display: flex;
+    justify-content: left;
+}
+
+.packs__header.tools {
+    gap: 10px;
+}
+
+.packs__header.info {
+    margin-bottom: 10px;
+}
+
+.packs__preview.block {
+    padding-top: 10px;
+    border-top: 1px solid var(--border_color);
+}
+
+.packs__preview.list {
+    gap: 10px;
+    overflow-x: scroll; 
+}
+
+.packs__preview.elem {
+}
+
+.packs__preview__img {
+    width: 120px;
+}

@@ -1,0 +1,54 @@
+@import url("colors.css");
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: var(--text_color);
+}
+
+.general_btn {
+    padding: 4px 10px;
+    height: 30px;
+    font-size: 16px;
+    background-color: var(--secondary_fg_color);
+    color: var(--text_color);
+    border-radius: 7px;
+    border: 1px solid var(--border_color);
+}
+
+.general_btn.danger_btn {
+    background-color: #952828;
+    color: var(--text_color);
+    border-color: var(--border_color);
+}
+
+.general_btn.safe_btn {
+    background-color: #2f712f;
+    color: var(--text_color);
+}
+
+.general_btn:hover {
+    background-color: var(--text_color);
+    border: 1px solid var(--text_color);
+    color: var(--primary_bg_color);
+}
+
+.icon {
+    height: 30px;
+    width: 30px;
+    font-size: 16px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 20%;
+}
+
+.list {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.notification {
+    border: 1px solid var(--border_color);
+    padding: 15px;
+}
