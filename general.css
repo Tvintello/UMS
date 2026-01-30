@@ -56,6 +56,6 @@ body {
 
 .error {
     border: 2px solid var(--danger_color);
-    color: var(--danger_color);
+    color: var(--danger_text);
     padding: 15px;
 }

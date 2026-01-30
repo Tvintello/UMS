@@ -2,6 +2,10 @@ import StorageManager from "../scripts/storage_manager.js";
 import ActionManager from "../scripts/action_manager.js";
 
 
+const action =  new ActionManager(document.getElementById("noteBlock"));
+const storage_manager = new StorageManager(action);
+
+
 async function deleteBtnFunction(del_btn) {
     del_btn.style["display"] = "none";
 
@@ -9,7 +13,7 @@ async function deleteBtnFunction(del_btn) {
     safe_del_btn.style["display"] = "block";
     safe_del_btn.addEventListener("click", async () => {
         del_btn.parentNode.parentNode.remove()
-        await StorageManager.deletePack(del_btn.parentNode.querySelector(".pack_name").innerHTML)
+        await storage_manager.deletePack(del_btn.parentNode.querySelector(".pack_name").innerHTML)
     });
     
     let discard_btn = del_btn.parentNode.querySelector(".no_delete_pack");
@@ -22,7 +26,20 @@ async function deleteBtnFunction(del_btn) {
 }
 
 
+function deletePackPreview(packname) {
+    const list = document.querySelectorAll('.pack_name');
+    for (let name of list) {
+        console.log(name.innerHTML)
+        if (name.innerHTML == packname) {
+            name.parentNode.parentNode.remove()
+        }
+    }
+}
+
+
 function appendPackPreview(pack, packname, icon="") {
+    deletePackPreview(packname);
+
     icon = pack[0];
     let pack_block = document.createElement("li");
     pack_block.setAttribute('class', 'packs elem');
@@ -75,12 +92,12 @@ function openOSFileManager(onchange, multiple=false, directory=false) {
 
 document.addEventListener('DOMContentLoaded', async function() {
     // DEBUGGING FUNCTION TO DELETE SAVED PACKS UPON CLICKING
-    // StorageManager.storage.local.set({"storedPacks": {}})
+    // storage_manager.storage.local.set({"storedPacks": {}})
     // DEBUGGING FUNCTION TO DELETE SAVED PACKS UPON CLICKING
 
     // Loading packs upon opening the page
     console.log("Loading packs...");
-    let packs = await StorageManager.getPacks();
+    let packs = await storage_manager.getPacks();
     console.log(packs);
     for (let packname in packs) {
         console.log(`Loading ${packname}...`)
@@ -92,10 +109,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 document.getElementById("addPlentyPacks").addEventListener("click", (event) => {
     openOSFileManager(async function (e) {
-        console.log("Saving packs...");
+        console.log("Analyzing packs...");
         const files = e.target.files;
         let packs = {};
         let packIndex = -1;
+        const stored = await storage_manager.getPacks();
         for (let i = 0; i < files.length; i++) {
             let file = files[i]
             // Organizing stickers in packs
@@ -115,8 +133,8 @@ document.getElementById("addPlentyPacks").addEventListener("click", (event) => {
                 };
                 // Collecting files to packs array
                 if (packs && packs[folder]) {
-                    const data = await StorageManager.fileToBase64(file);
-                    if (!data) {ActionManager.error("Could not add the chosen packs!"); return;}
+                    const data = await storage_manager.fileToBase64(file);
+                    if (!data) {console.log("Could not add the chosen packs!"); return;}
                     packs[folder].push(data);
                     console.log("Collected image: ", file)
                 }
@@ -124,9 +142,10 @@ document.getElementById("addPlentyPacks").addEventListener("click", (event) => {
         };
         // Append last remaining pack to html
         let last_pack = files[files.length - 1].webkitRelativePath.split("/")[1];
-        appendPackPreview(packs[last_pack], last_pack)
-
-        StorageManager.savePacks(packs);
+        if (packIndex != -1) {
+            appendPackPreview(packs[last_pack], last_pack)
+            storage_manager.savePacks(packs)
+        } else action.error("No packs were found!")
     }, false, true);
 })
 
@@ -136,16 +155,23 @@ document.getElementById("addPack").addEventListener("click", (event) => {
         async function (e) {
             const files = e.target.files;
             let packname = files[0].webkitRelativePath.split("/")[0]
+            const stored = await storage_manager.getPacks();
+            if (packname in stored) {
+                if (!confirm(`Pack with name "${packname}" already exists! Do you want to replace it?`)) {
+                    return;
+                }
+            }
+
             console.log(`Saving pack: ${packname}...`);
             let packs = {[packname]: []};
             for (let file of files) {
                 // Converting files to base64 file format and collecting them
-                const data = await StorageManager.fileToBase64(file);
-                if (!data) {ActionManager.error("Could not add the chosen pack!"); return;}
+                const data = await storage_manager.fileToBase64(file);
+                if (!data) {console.log("Could not add the chosen pack!"); return;}
                 packs[packname].push(data);
                 console.log("Collected image: ", file)
             }
-            StorageManager.savePacks(packs);
+            storage_manager.savePacks(packs);
     
             // Appending sticker pack to html
             appendPackPreview(packs[packname], packname);

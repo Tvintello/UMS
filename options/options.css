@@ -65,6 +65,10 @@ body {
     gap: 10px;
 }
 
+#noteBlock {
+    margin-top: 10px;
+}
+
 .packs__header.info {
     margin-bottom: 10px;
 }

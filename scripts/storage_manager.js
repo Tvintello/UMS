@@ -2,7 +2,8 @@ import BrowserManager from "./browser_manager.js";
 
 
 class StorageManager {
-    constructor() {
+    constructor(action) {
+        this.action = action;
         this.storage = BrowserManager.browser.storage;
     }
 
@@ -42,8 +43,8 @@ class StorageManager {
 
     async fileToBase64(file, image=true) {
         if (image && file.type.split("/")[0] != "image") {
-            console.error(file.name + " file is not an image");
-            return
+            this.action.error(file.name + " file is not an image");
+            return;
         }
         const buffer = await this.readFileAsArrayBuffer(file);
         const base64 = this.arrayBufferToBase64(buffer);
@@ -96,5 +97,4 @@ class StorageManager {
 
 };
 
-const storageManager = new StorageManager();
-export default storageManager;
+export default StorageManager;

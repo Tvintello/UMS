@@ -1,9 +1,14 @@
 import StorageManager from "../scripts/storage_manager.js";
 import BrowserManager from "../scripts/browser_manager.js";
+import ActionManager from "../scripts/action_manager.js";
+
+
+const action =  new ActionManager(document.getElementById("noteBlock"));
+const storage_manager = new StorageManager(action);
 
 
 document.addEventListener('DOMContentLoaded', async function() {
-    const packs = await StorageManager.getPacks();
+    const packs = await storage_manager.getPacks();
 
     for (let packname in packs) {
         let icon = packs[packname][0]
@@ -22,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             img.addEventListener("click", () => {
                 navigator.clipboard.write([
                     new ClipboardItem({
-                        [file.type]: StorageManager.base64ToBlob(file.data, file.type)
+                        [file.type]: storage_manager.base64ToBlob(file.data, file.type)
                     })
                 ])
                 console.log("Image copied: ", file.name)
@@ -50,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         pack_btn_li.appendChild(pack_btn);
         document.querySelector(".header.list").appendChild(pack_btn_li);
-        document.getElementById("noPacksLabel").style["display"] = "none";
+        document.getElementById("noteBlock").style["display"] = "none";
     }
 
     document.getElementById("settings").addEventListener("click", () => {
