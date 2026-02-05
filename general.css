@@ -27,7 +27,7 @@ body {
     color: var(--text_color);
 }
 
-.general_btn:hover {
+.general_btn:hover, .general_btn[toggled] {
     background-color: var(--text_color);
     border: 1px solid var(--text_color);
     color: var(--primary_bg_color);
@@ -41,6 +41,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 20%;
+    background-image: url(icons/ss-48.png);
 }
 
 .list {
@@ -58,4 +59,18 @@ body {
     border: 2px solid var(--danger_color);
     color: var(--danger_text);
     padding: 15px;
+}
+
+input[type="text"] {
+    border: 1px solid var(--border_color);
+    background-color: var(--primary_bg_color);
+    border-radius: 7px;
+    color: var(--text_color);
+    font-size: 16px;
+    font-family: inherit;
+    padding: 5px;
+}
+
+input[type="text"]:hover {
+    border: 1px solid var(--text_color);
 }

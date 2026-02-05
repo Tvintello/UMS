@@ -32,7 +32,7 @@ body {
     border-radius: 5px;
 }
 
-.packs.elem {
+.packs.elem, .packs__header.block {
     display: flex;
     background-color: #f7f7f7;
     border: 1px solid var(--border_color);
@@ -43,11 +43,14 @@ body {
 }
 
 .packs.list {
-    padding: 15px;
+    margin-top: 10px;
+    padding: 15px 0px;
     flex-direction: column;
     gap: 20px;
-    border-top: 1px solid var(--border_color);
-    border-bottom: 1px solid var(--border_color);
+}
+
+.packs__list-placeholder {
+    background-color: var(--primary_fg_color);
 }
 
 .pack_name {
@@ -58,11 +61,24 @@ body {
 }
 
 .packs__header {
-    display: flex;
+    display: flex; 
 }
 
 .packs__header.tools {
+    align-items: center;
+    justify-content: center;
     gap: 10px;
+}
+
+.packs__header.subtools {
+    border-top: 2px solid var(--border_color);
+    margin-top: 10px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.packs__header.subtools > .pack_name {
+    margin-right: auto;
 }
 
 #noteBlock {
@@ -71,6 +87,12 @@ body {
 
 .packs__header.info {
     margin-bottom: 10px;
+}
+
+.packs__header.info > .tools {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
 }
 
 .packs__preview.block {

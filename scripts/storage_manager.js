@@ -7,6 +7,20 @@ class StorageManager {
         this.storage = BrowserManager.browser.storage;
     }
 
+    getPackIcon(pack) {
+        if (pack.icon) {
+            return pack.icon;
+        } else if (pack.data) {
+            return pack.data[0];
+        }
+        return '';
+    }
+
+    getPackIconStyle(pack) {
+        const icon = this.getPackIcon(pack);
+        return icon ? `background-image: url(data:${icon.type};base64,${icon.data});`: '';
+    }
+
     async getPacks() {
         const result = await this.storage.local.get('storedPacks');
         const storedPacks = result.storedPacks || {};
@@ -64,37 +78,38 @@ class StorageManager {
         console.log("Deleted pack: ", packname)
     }
 
-    async savePacks(base64Packs) {
-        let newPacks = {};
-        for (let packname in base64Packs) {
-            let pack = [];
-            for (let file of base64Packs[packname]) {
-                pack.push(file);
-            }
-            newPacks[packname] = pack;
-        }    
+    async savePacks(base64Packs) { 
         try {
             const stored = await this.getPacks()
-            const data = {'storedPacks': {...stored, ...newPacks}};
+            const data = {'storedPacks': {...stored, ...base64Packs}};
             await this.storage.local.set(data);
-            console.log("Saved packs: ", newPacks);
+            console.log("Saved packs: ", base64Packs);
             console.log("All saved packs: ", data);
         } catch {
             console.error("Could not save pack to the local storage!");
         }
-        
-
-        return newPacks;
+        return base64Packs;
     }
     
-    async saveSticker(packname, base64File) {
+    async saveStickers(packname, files) {
         const storedPacks = await this.getPacks();
-        storedPacks[packname][filename] = base64File;
-        await this.storage.local.set({ storedPacks });
-        
-        return filename;
-    }
 
+        if (!(packname in storedPacks)) {
+            console.log(`There is no ${packname} pack stored`);
+            return;
+        }
+
+        for (let file of files) {
+            const sticker = await this.fileToBase64(file);
+            storedPacks[packname].data.push(sticker);
+        }
+        console.log("New stickers:", files)
+        console.log(packname, "pack:", storedPacks[packname])
+        console.log("All saved packs", storedPacks);
+        await this.storage.local.set({"storedPacks": storedPacks});
+        
+        return storedPacks[packname];
+    }
 };
 
 export default StorageManager;

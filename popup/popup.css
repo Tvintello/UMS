@@ -37,6 +37,7 @@ body {
 
 
 .content {
+    width: inherit;
     height: 350px;
     padding: 0;
     scrollbar-width: none;
@@ -44,16 +45,20 @@ body {
 }
 
 .pack.list {
+    width: inherit;
     margin: 0;
 }
 
 .pack.block {
+    width: inherit;
     background-color: var(--primary_fg_color);
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     gap: 5px 5px;
     margin-bottom: 5px;
     border-radius: 10px;
+    width: inherit;
 }
 
 .pack_header {

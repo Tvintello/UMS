@@ -17,6 +17,27 @@
                 <li class="options elem">
                     <div class="packs block">
                         <h2 class="text">Loaded sticker packs</h2>
+                        <div class="packs__header block">
+                            <div class="packs__header tools">
+                                <button class="general_btn" id="addPack" title="Locate folder with images">Add new pack</button>
+                                <button class="general_btn" id="addPlentyPacks" title="Locate folder with folders of images">Add multiple packs</button>
+                                <button class="general_btn" id="createBlankPack">Create blank pack</button>
+                            </div>
+                            <div class="packs__header subtools" style="display: none;">
+                                <button class="general_btn icon choose_icon" style="background-image: url(../icons/ss-48.png);" title="Pack icon"></button>
+                                <input type="text" class="pack_name" id="enterPackName" placeholder="Enter pack name" autocomplete="off">
+                                <button class="general_btn safe_btn confirm">Create</button>
+                            </div>
+                            <div id="noteBlock" class="packs__header" style="display: none;"></div>
+                        </div>
+                        <ul class="packs list">
+                            <span class="packs__list-placeholder placeholder notification">You have no packs yet</span>
+                        </ul>
+                    </div>
+                </li>
+                <!-- <li class="options elem">
+                    <div class="packs block">
+                        <h2 class="text">Image limiter</h2>
                         <ul class="packs list">
                             <li class="packs elem">
                                 <div class="packs__header tools">
@@ -28,8 +49,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-                <li class="options elem">Option...</li>
+                </li> -->
                 <li class="options elem">Option...</li>
                 <li class="options elem">Option...</li>
                 <li class="options elem">Option...</li>
@@ -38,5 +58,6 @@
         </div>
     </div>
 </body>
+<script src="../scripts/general.js"></script>
 <script type="module" src="options.js"></script>
 </html>

@@ -11,14 +11,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     const packs = await storage_manager.getPacks();
 
     for (let packname in packs) {
-        let icon = packs[packname][0]
+        const pack = packs[packname]
+
+        let icon_style = storage_manager.getPackIconStyle(pack);
+
         let pack_block = document.createElement("li");
         pack_block.setAttribute("class", "pack block");
         pack_block.setAttribute("id", packname);
 
         let sticker_list = document.createElement("div");
         sticker_list.setAttribute("class", "pack img_wrapper")
-        for (let file of packs[packname]) {
+        for (let file of pack.data) {
             let img = document.createElement("img");
             img.setAttribute("class", "sticker");
             img.setAttribute("src", `data:${file.type};base64,${file.data}`);
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         pack_block.innerHTML = `
         <div class="pack_header">
-            <div style="background-image: url(data:${icon.type};base64,${icon.data});" class="icon")></div>
+            <div style="${icon_style}" class="icon")></div>
             <div class="pack title">${packname}</div>
         </div>
         `
@@ -50,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         let pack_btn = document.createElement("a");
         pack_btn.setAttribute("class", "header_button icon");
-        pack_btn.setAttribute("style", `width: 30px; height: 30px; display: block; margin: 0; background-image: url(data:${icon.type};base64,${icon.data})`);
+        pack_btn.setAttribute("style", `width: 30px; height: 30px; display: block; margin: 0; ${icon_style})`);
         pack_btn.setAttribute("href", "#" + packname);
 
         pack_btn_li.appendChild(pack_btn);
